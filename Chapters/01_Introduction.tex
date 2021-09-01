@@ -1,0 +1,47 @@
+\chapter{Introduction}
+
+This chapter seeks to introduce the project, as well as the goals and ambitions for the project. Furthermore the product domain is outlined through an outline of similar and competing products and how they work. A general introduction to the technologies used by this project is included as well, as well as what these technologies are used for in the project. Finally, the teams learning objectives are outlined towards the end of the chapter.
+
+\section{CoffeeBreak - \thesissubtitle}
+
+\subsection{Goals}
+
+The primary goal of this project is to develop a robust and competently build product using the technologies and methodologies known and available to the developers. The product, CoffeeBreak, is in itself built to solve the issue of online meetings often being \textit{flat}, in the sense that everyone in the meeting is broadcasting their voice and video to everyone else in the meeting. While this is great for actual meetings, it often quickly becomes troublesome when the meetings need break out into discussion groups. CoffeeBreak seeks to solve this by providing a virtual space wherein those in the meeting can freely move around inside the space, with proximity based voice and video chat which keeps individual user groups separate, and thus allow for multiple separate discussions to occur simultaneously in the same room.
+
+The secondary goal is to try and design and implement different solutions to the same problem, then measure the performance of different solutions from a black-box perspective using the same tools and methods, as well as evaluate them on technical complexity, in order to find out the pros and cons of the different solutions.
+
+\subsection{Motivation}
+
+The motivation for the primary goal, development of the CoffeeBreak system, is purely educational, it is merely created mostly for learning about the various technologies and practices involved in creating such a system. The motivation for the secondary goal is to attempt to find out the best ways to implement such a system, in terms of both complexity and potential costs.
+
+\section{Related and Competing Works}
+
+\subsection{Discord}
+
+Discord is a widely popular online communication service which supports all audio, video, and text communication. Communication often occurs in guilds\cite{discorddocsguild}, also known as \textit{servers}, which contains a list of channels that the users can use for communications. Channels are either text channels, or voice/video channels and the users can, assuming they have permission to do so by the guild rules, freely chose which channels to communicate in. Communication can occur outside guilds in direct message channels, however this is not of importance to the project.\cite{discordwebrtc}
+
+Discord uses a HTTPS/REST API for general communications as well as WebSockets for sending real-time events and messages between the front-end and the back-end.\cite{discordapireference}. It is described as being a distributed system which relies heavily on Elixir for back-end components, including a GenServer process for each guild, the effective equivalent of a room in the context of CoffeeBreak, as well as consistent hashing for distributing requests.\cite{discordscaling}
+
+Discord makes use of WebRTC\cite{webrtc} to facilitate voice/video communications across users in a voice/video channel, using a Media Relay Server which then relays user media streams to each other, without exposing their public IP addresses to each other or relying on ICE\cite{webrtcprotocols} protocols to facilitate connections, reducing potential issues with certain types of NAT. While this is secure and more reliable, the solution also appears to be somewhat complicated.\cite{discordwebrtc}
+
+Furthermore, the Discord desktop client makes use custom-build media engine built on top of the existing WebRTC native library, which allows them greater control of the media streams, however at the cost of requiring constant maintenance to keep updated with WebRTCs development.\cite{discordwebrtc}
+
+Discords back-end, in general, appears highly advanced, using a number of advanced techniques that are both beyond skill level of the CoffeeBreak team, and would probably take significantly more time to implement than is available. The material does, however, indicate that it is perfectly feasible to create a distributed WebSocket based system, such as what would be needed for this project. Additionally, the use of WebRTC could be an excellent candidate for facilitating video and voice communication within a room.
+
+\subsection{Zoom}
+
+Zoom is another incredibly popular online communication service, one focused primarily around hosting meetings using voice/video communications, with text communication being available. This is commonly used for both for education and for organization communications as an alternative for physical meetings. With Zoom, a user with a subscription can host a zoom room which people can join using a special URL.\cite{zoom}
+
+As with Discord, Zoom voice and video chat works through WebRTC or technology build on top of WebRTC such as Vonage Video API\cite{vonageapi}, as well as a number of other APIs used to power the chat and room hosting.\cite{zoom} There seems to be little in the material on Zoom which is able to help this project, except further supporting the use of WebRTC for video and voice connections. The back-end of Zoom can with some level of confidence be assumed to be scalable, due to its rapid, seemingly smooth growth during quarantine, though the inner workings of Zoom remains a mystery.
+
+\subsection{Mumble}
+
+Mumble is an open-source self-hosted client-server based online communication service which allows for voice and text chat inside channels on servers hosted manually much like Discord albeit it arguably more primitive in terms of user experience, as Mumble is an older piece of software. Owing to Mumbles open-source self-hosted nature, communication is entirely private between everyone who is connected to a particular server.\cite{mumbleprotocol}
+
+Mumble uses it's own custom low level protocol for all kinds of communication, including server events, text, and voice communication\footnote{The Mumble website front page claims that Mumble uses VoIP communication, but the protocol documentation does not appear to expand on this.\cite{mumble}}. This allows them full control of what is transmitted between the users and the server, at cost of significant increase in complexity. The custom protocol allows for easy integration of positional XYZ data alongside the voice data, which can then be used by plugins to alter the gain of users based on their proximity to each other.\cite{mumblevoicedata}
+
+In order to allow proximity based voice chat, CoffeeBreak needs to, in one way or another, be aware of the virtual world position of all room members. The Mumble documentation points towards them using their very own protocol which supports that, but it does also indicate that there is no more data necessary to be transmitted other than member coordinates, something which could easily be done using WebSockets or even simply HTTP.
+
+\section{Conclusion}
+
+There are two major goals with the development of the CoffeeBreak system, a primary which is to design and implement the system itself, for the great learning opportunities such a project provides. The secondary goal is to attempt to design and implement varieties to the solution, in order to measure and compare different solutions in terms of complexity and performance. A number of existing products were evaluated, which pointed towards the use of sockets and the "WebRTC" technology as major parts of similar systems.

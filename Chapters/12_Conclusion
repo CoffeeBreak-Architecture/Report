@@ -1,0 +1,12 @@
+\chapter{Conclusion}
+
+The first system, "Odin", resulted in a Peer to peer communication solution hosted on a Kubernetes Cluster. The Kubernetes cluster is hosted on Google Cloud, resulting in a simple deployment. The final product is able to host multiple users in self created rooms. When users move around and near each other, audio and video connections is automatically established. The second system is almost identical, however a server handling the audio and video connections is used instead of a direct connection. This solution didn't get a Kubernetes deployment due to time constraints. 
+
+The overall reception of the system is positive. As can be expected from a software product in development, many bugs were found due to external and internal testing, but the overall system and the way it works fundamentally was an interesting aspect to the users testing the system. The fact that users could move around and connect to specific groups based on those nearby in a dynamic fashion, and not just joining a room, was received positively.
+
+To conclude on the overall goal, the group achieved to create the system CoffeeBreak, an application that enables communication in a virtual space. This was further determined by series of tests to ensure all requirements were implemented and completed. 
+
+A secondary goal was also established to determine the performance differences of the media transfer between the two established systems and also the overall performance of the created Kubernetes deployment of the "Odin" solution. Through testing of both solutions, it was determined that the Vili solution would perform better on a higher scale, since the CPU usage increased in a linear fashion, in contrast to Odin's exponential growth. The overall performance of the Odin implementation was tested through multiple stress tests that targeted the core parts of the system, and they resulted in that he systems overall performance under heavy stress was satisfactory.
+
+At the end, the group achieved creating multiple proposals to a virtual communication platform, comparing them in order to find the performance differences. Through this it was concluded that a MRS design gives a lower growth of CPU performance compared to a P2P solution. Additionally, establishing a solid deployment architecture that is backed by stress testing of the core parts of the system. In conclusion, the group reached its goals established at the beginning of the project and have achieved their learning objectives.
+
